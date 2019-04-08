@@ -1,0 +1,19 @@
+//Mai Nou Yang & Nathan Moder
+//This file is for the Mux4 selector
+
+/**
+* 4-bit multiplexor. If sel=0, then out = a else out = b.
+*/
+
+CHIP Mux4 {
+
+    IN a[4], b[4], sel ;
+    Out out[4] ;
+
+    PARTS:
+        Not(in = sel , out = notSel) ;
+        And(a = notSel, b = a, out = out1) ;
+        And(a = sel, b = b, out = out2) ;
+        Or(a = out1, b = out2, out = out) ; 
+
+}

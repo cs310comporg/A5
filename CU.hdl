@@ -1,0 +1,13 @@
+/**
+ * Hardwired control unit for the single-cycle implementation 
+ * of the Larc ISA. Use the opcodes given in the notes. 
+ */
+
+CHIP CU {
+
+    IN opcode[                 ];
+    OUT out[             ];
+
+    PARTS:
+    // Implementation missing
+}

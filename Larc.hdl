@@ -1,0 +1,56 @@
+/**
+ * Single-cycle implementation of the Larc ISA
+ */
+
+CHIP Larc {
+
+    PARTS:
+
+    //pc
+    PC(in = pcIncremented , out = currPC) ;
+
+    //Increment PC by 1
+    Inc16(in = currPC, out = currPCplusOne) ;
+
+    //Add for bne and beq
+    Add16(a = currPCplusOne , b[0..7] = instruction[4..11], b[8..15] = instruction[11] , out = currPCplusOffset) ;
+
+    //jal selector
+    Mux4(a = currPCplusOne , b =  , sel = jal , out = jalOut ) ;
+
+    //be and bne selector
+    Mux4(a = jalOut , b = currPCplusOffset , sel = bneOrbe , out = pcInput ) ;
+
+    //IM
+    RAM4K(in = currPc , out = instruction) ;
+
+    //RFWD selector
+    Mux4Way16(a[0..7] = 0, a[8..15] = instruction[0...7], b[0..6] = instruction[0..6] , b[7..15] = instruction[7] , c = currPCplusOne , d = lwOut ,  sel = rfwd , out = inForWd) ;
+
+    //RF
+    RegisterFile(rr1 = instruction[4..7] , rr2 = instruction[0..3] , wr = instruction[8..11] , wd = inForWd, load = rewrite , rd1 = rd1Out, rd2 = rd2Out) ;
+
+    //SE
+    Mux4(a = instruction[8..11] , b = instruction[0..3] , sel = se , out = seOut) ;
+
+    //RD1 selector
+    Mux4(a = false , b = rd1Out , sel = rd1 , out = rd1Selector) ;
+
+    //RD2 selector
+    Mux4(a = rd2Out , b = seOut , sel = alu , out = rd2Selector) ;
+
+    //ALU
+    ALU(x = rd1Selector , y = rd2Selector , sub = sub , nor = nor , z = z , out = aluOut) ;
+
+    //bne and be circuit
+    Not(in = z , out = notZ) ;
+    And(a = be , b = z , out = beAndz) ;
+    And(a = bne , b notZ, out = bneAndNotZ) ;
+    Or(a = beAndZ , b = bneAndNotZ , out = bneOrbe) ;
+
+    //LW selector
+    Mux4(a = aluOut , b = dmOut, out = lwOut) ;
+
+    //DM
+    RAM16K(in = rd2Out , address = aluOut , out = dmOut) ;
+}
