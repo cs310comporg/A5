@@ -5,9 +5,26 @@
 
 CHIP CU {
 
-    IN opcode[                 ];
-    OUT out[             ];
+    IN opcode[4];
+    OUT out[16];
 
     PARTS:
-    // Implementation missing
+    Mux16Way16( sel = opcode , 
+                a[0..7] = false , a[8..10] = true , a[11] = false , a[12] = true , a[13] = false , a[14..15] = false ,
+                b[0..2] = false , b[3] = true , b[4..7] = false , b[8..10] = true , b[11] = false , b[12] = true , b[13] = false , b[14..15] = false ,
+                c[0..15] = false ,
+                d[0..15] = false , 
+                e[0..7] = false , e[8..10] = true , e[11..13] = false , e[14] = true , e[15] = false ,
+                f[0..15] = false ,
+                g[0..1] = false , g[2] = true , g[3..7] = false , g[8..10] = true , g[11] = false , g[12] = true , g[13] = false , g[14..15] = false ,
+                h[0..1] = false , h[2..3] = true , h[8..10] = true , h[11] = false , h[12] = true , h[13] = false , h[14..15] = false ,
+                i[0..7] = false , i[8..9] = true , i[10..15] = false ,
+                j[0..7] = false , j[8] = true , j[9..15] = false ,
+                k[0..4] = false , k[5] = true , k[6..15] = false ,
+                l[0..3] = false , l[4] = true , l[5..15] = false ,
+                m[0] = true , m[1..6] = false , m[7..12] = true , m[13..15] = false ,
+                n[0] = false , n[1] = true , n[2..6] = false , n[7] = true , n[8..11] = false , n[12] = true , n[13..15] = false ,
+                o[0..5] = false , o[6] = true , o[7] = false , o[8] = true , o[9] = false , o[10] = true , o[11..15] = false ,
+                p[0..15] = true ,
+                out = out) ; 
 }

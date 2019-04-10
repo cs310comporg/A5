@@ -26,7 +26,7 @@ CHIP RegisterFile {
 
     PARTS:
     DMux16Way(in=load, sel=wr, a=a, b=b, c=c, d=d, e=e, f=f, g=g, h=h, i=i, j=j, k=k, l=l, m=m, n=n, o=o, p=p);
-    RegisterR0(in=wd, load=false, out=out1);
+    RegisterR0(in=false, load=false, out=out1);
     RegisterR1(in=wd, load=b, out=out2);
     RegisterR2(in=wd, load=c, out=out3);
     RegisterR3(in=wd, load=d, out=out4);
@@ -42,6 +42,6 @@ CHIP RegisterFile {
     RegisterR13(in=wd, load=n, out=out14);
     RegisterR14(in=wd, load=o, out=out15);
     RegisterR15(in=wd, load=p, out=out16);
-    Mux16Way(a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8, i=out9, j=out10, k=out11, l=out12, m=out13, n=out14, o=out15, p=out16, sel=rr1, out=rd1);
+    Mux16Way16(a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8, i=out9, j=out10, k=out11, l=out12, m=out13, n=out14, o=out15, p=out16, sel=rr1, out=rd1);
     Mux16Way16(a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8, i=out9, j=out10, k=out11, l=out12, m=out13, n=out14, o=out15, p=out16, sel=rr2, out=rd2);
 }
