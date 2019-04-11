@@ -17,10 +17,10 @@ CHIP ALU1bit {
         cout;    // carry-out bit (ignored for NOR)
 
     PARTS:
-        Not(in=b, out=notB);
-        Mux(a=b, b=notB, sel=sub, out=outB);
-        FullAdder(a=a, b=outB, c=cin, carry=cout, sum=aPlusB);
-        Or(a=a, b=b, out=aOrB);
-		Not(in=aOrB, out=aNorB);
-        Mux(a=aPlusB, b=aNorB, sel=nor, out=out);
+        Not(in = b , out = notB) ;
+        Mux(a = b , b = notB , sel = sub , out = outB) ;
+        FullAdder(a = a , b = outB , c = cin , carry = cout , sum = aPlusB) ;
+        Or(a = a , b = b , out = aOrB) ;
+		Not(in = aOrB , out = aNorB) ;
+        Mux(a = aPlusB , b = aNorB , sel = nor , out = out) ;
 }

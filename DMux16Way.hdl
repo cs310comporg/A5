@@ -24,9 +24,9 @@ CHIP DMux16Way {
     OUT a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p;
 
     PARTS:
-        DMux(in=in, sel=sel[3], a=out1a, b=out1b);
-        DMux8Way(in=out1a, sel[0]=sel[0], sel[1]=sel[1], sel[2]=sel[2],
-            a=a, b=b, c=c, d=d, e=e, f=f, g=g, h=h);
-        DMux8Way(in=out1b, sel[0]=sel[0], sel[1]=sel[1], sel[2]=sel[2],
-			a=i, b=j, c=k, d=l, e=m, f=n, g=o, h=p);
+        DMux(in = in , sel = sel[3] , a = out1a , b = out1b) ;
+        DMux8Way(in = out1a , sel[0] = sel[0] , sel[1] = sel[1] , sel[2] = sel[2] ,
+            a = a , b = b , c = c , d = d , e = e , f = f , g = g , h = h) ;
+        DMux8Way(in = out1b , sel[0] = sel[0] , sel[1] = sel[1] , sel[2] = sel[2] ,
+			a = i , b = j , c = k , d = l , e = m , f = n , g = o , h = p) ;
 }
